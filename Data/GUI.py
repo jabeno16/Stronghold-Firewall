@@ -89,7 +89,11 @@ def enter_data():
     SCRport = SRC_port_entry.get()
     DSTIP = DST_IP_entry.get()
     DSTport = DST_port_entry.get()
-
+    
+    if inbound_dir != "Accepted" and outbound_dir != "Accepted" and bi_dir != "Accepted":
+        tkinter.messagebox.showwarning(title="Error", message="Select Traffic Direction ,Please!")
+        return
+    
     if inbound_dir == "Accepted" and outbound_dir == "Accepted":
         tkinter.messagebox.showwarning(title="Error", message="Only one Box for Traffic Direction can be "
                                                               "Selected, Try again!")
