@@ -30,6 +30,13 @@ def check_credentials():
             window1.destroy()
         else:
             messagebox.showerror('Error', 'Incorrect username or password')
+            
+ 
+def disable_close(window):
+    window.protocol("WM_DELETE_WINDOW", lambda: None)
+
+
+disable_close(window1)
 
 
 def login():
