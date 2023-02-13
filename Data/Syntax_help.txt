@@ -1,56 +1,57 @@
+!!!ALL RULES REQUIRE ACTION AND SOURCE IP TO BE FILLED!!!
 INBOUND RULES
-1. if not DSTIP and not SCRport and not DSTport and not Protocol:
+1. if not DSTIP and not SCRport and not DSTport and not Protocol: **FILL ACTION AND SOURCE IP.
 Result = sudo ufw allow from ANY
 
-2. if DSTIP and not SCRport and not DSTport and not Protocol:
+2. if DSTIP and not SCRport and not DSTport and not Protocol: **FILL ACTION, SOURCE IP, DESTINATION IP.
 Result = sudo ufw allow from ANY to ANY
 
-3. if DSTIP and Protocol and not SCRport and not DSTport:
+3. if DSTIP and Protocol and not SCRport and not DSTport: **FILL ACTION, SOURCE IP, DESTINATION IP, PROTOCOL.
 Result = sudo ufw allow from ANY to ANY proto ANY
 
-4. if DSTIP and not Protocol and SCRport and DSTport:
+4. if DSTIP and not Protocol and SCRport and DSTport: **FILL ACTION, SOURCE IP, DESTINATION IP, SOURCE PORT, DESTINATION PORT.
 Result = sudo ufw allow from ANY port ANY to ANY port ANY
 
-5. if DSTIP and Protocol and DSTport and not SCRport:
+5. if DSTIP and Protocol and DSTport and not SCRport: **FILL ACTION, SOURCE IP, DESTINATION IP, DESTINATION PORT, PROTOCOL.
 Result = sudo ufw allow from ANY to ANY port ANY proto ANY
 
 
 
 OUTBOUND RULES
-1. if not DSTIP and not SCRport and not DSTport and not Protocol:
+1. if not DSTIP and not SCRport and not DSTport and not Protocol: **FILL ACTION AND SOURCE IP.
 Result = sudo ufw allow out from ANY
 
-2. if DSTIP and not SCRport and not DSTport and not Protocol:
+2. if DSTIP and not SCRport and not DSTport and not Protocol: **FILL ACTION, SOURCE IP, DESTINATION IP.
 Result = sudo ufw allow out from ANY to ANY
 
-3. if DSTIP and Protocol and not SCRport and not DSTport:
+3. if DSTIP and Protocol and not SCRport and not DSTport: **FILL ACTION, SOURCE IP, DESTINATION IP, PROTOCOL.
 Result = sudo ufw allow out from ANY to ANY proto TCP
 
-4. if DSTIP and not Protocol and SCRport and DSTport:
+4. if DSTIP and not Protocol and SCRport and DSTport: **FILL ACTION, SOURCE IP, DESTINATION IP, SOURCE PORT, DESTINATION PORT.
 Result = sudo ufw allow out from ANY port ANY to ANY port ANY
 
-5. if DSTIP and Protocol and DSTport and not SCRport:
+5. if DSTIP and Protocol and DSTport and not SCRport: **FILL ACTION, SOURCE IP, DESTINATION IP, DESTINATION PORT, PROTOCOL.
 Result = sudo ufw allow out from ANY to ANY port ANY proto TCP
 
 
 
 BI-DIRECTIONAL RULES
-1. if not DSTIP and not SCRport and not DSTport and not Protocol:
+1. if not DSTIP and not SCRport and not DSTport and not Protocol: **FILL ACTION AND SOURCE IP.
 Result =sudo ufw Action from SourceIP to SourceIP
        
-2. if DSTIP and not SCRport and not DSTport and not Protocol:
+2. if DSTIP and not SCRport and not DSTport and not Protocol: **FILL ACTION, SOURCE IP, DESTINATION IP.
 Result = sudo ufw Action from SourceIP to DSTIP
 Result = sudo ufw Action out from DSTIP to SourceIP
          
-3. if DSTIP and Protocol and not SCRport and not DSTport:
+3. if DSTIP and Protocol and not SCRport and not DSTport: **FILL ACTION, SOURCE IP, DESTINATION IP, PROTOCOL.
 Result = sudo ufw Action from SourceIP to DSTIP proto Protocol
 Result = sudo ufw Action from DSTIP to SourceIP proto Protocol
 
-4. if DSTIP and not Protocol and SCRport and DSTport:
+4. if DSTIP and not Protocol and SCRport and DSTport: **FILL ACTION, SOURCE IP, DESTINATION IP, SOURCE PORT, DESTINATION PORT.
 Result = sudo ufw Action from SourceIP port SCRport to DSTIP port DSTport
 Result = sudo ufw Action from DSTIP port DSTport to SourceIP port SCRport
 
-5.if DSTIP and Protocol and DSTport and SCRport:
+5.if DSTIP and Protocol and DSTport and SCRport: **FILL ACTION, SOURCE IP, DESTINATION IP, DESTINATION PORT, SOURCE PORT, PROTOCOL.
 Result = sudo ufw Action from SourceIP port SCRport to DSTIP port DSTport proto Protocol
 Result = sudo ufw Action from DSTIP port DSTport to SourceIP port SCRport proto Protocol
 
