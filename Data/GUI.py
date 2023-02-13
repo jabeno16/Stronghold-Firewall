@@ -7,7 +7,6 @@ from tkinter import PhotoImage
 from tkinter import messagebox
 import subprocess
 
-
 window1 = customtkinter.CTk()
 window1.geometry("500x550")
 customtkinter.set_appearance_mode("dark")
@@ -30,8 +29,8 @@ def check_credentials():
             window1.destroy()
         else:
             messagebox.showerror('Error', 'Incorrect username or password')
-            
- 
+
+
 def disable_close(window):
     window.protocol("WM_DELETE_WINDOW", lambda: None)
 
@@ -89,11 +88,10 @@ def enter_data():
     SCRport = SRC_port_entry.get()
     DSTIP = DST_IP_entry.get()
     DSTport = DST_port_entry.get()
-    
+
     if inbound_dir != "Accepted" and outbound_dir != "Accepted" and bi_dir != "Accepted":
         tkinter.messagebox.showwarning(title="Error", message="Select Traffic Direction ,Please!")
         return
-    
     if inbound_dir == "Accepted" and outbound_dir == "Accepted":
         tkinter.messagebox.showwarning(title="Error", message="Only one Box for Traffic Direction can be "
                                                               "Selected, Try again!")
@@ -251,8 +249,19 @@ def show_all_ufw_rules():
     rules_window = tk.Toplevel(window2)
     ufw_rules = subprocess.run(["sudo", "ufw", "status", "numbered"], stdout=subprocess.PIPE)
     rules_text = ufw_rules.stdout.decode()
-    rules_label = tk.Label(rules_window, text=rules_text)
-    rules_label.pack()
+    lines = rules_text.split("\n")
+    rules_label = tk.Text(rules_window, font=('Arial', 14), background='white', wrap=tk.WORD, height=15)
+    rules_label.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
+    rules_label.tag_configure("red", foreground="red")
+    rules_label.tag_configure("blue", foreground="blue")
+
+    for line in lines:
+        if "DENY" in line:
+            rules_label.insert(tk.END, line + "\n", "red")
+        elif "ALLOW" in line:
+            rules_label.insert(tk.END, line + "\n", "blue")
+        else:
+            rules_label.insert(tk.END, line + "\n")
 
 
 button = tk.Button(frame, text="Show All UFW Rules \n (Root is required)", command=show_all_ufw_rules,
@@ -424,5 +433,3 @@ window2.mainloop()
 # THIS DESTROYS THE PROGRAM WHEN IT IS CLOSED
 def exit_program():
     window2.destroy()
-
-
