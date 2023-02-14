@@ -1,1 +1,14 @@
-Here we will post how to install and use our GUI!
+Download PyCharm:
+Visit the official website of PyCharm (https://www.jetbrains.com/pycharm/download/#section=linux) and download the latest version of the PyCharm Community Edition package for Linux. The package will be saved as a .tar.gz file.
+
+Extract the Package:
+Open the terminal and navigate to the directory where the downloaded package is located. Then, run the following command to extract the package:
+tar xvzf pycharm-community-*.tar.gz
+
+This will extract the PyCharm files into a directory named pycharm-community-*, where * represents the version number.
+
+Navigate to the Extracted Directory:
+After extraction, navigate to the extracted directory with the following command:
+bash
+Copy code
+cd pycharm-community-*
